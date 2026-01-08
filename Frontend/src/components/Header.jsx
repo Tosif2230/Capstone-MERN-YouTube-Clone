@@ -5,9 +5,9 @@ import { IoSearchOutline } from "react-icons/io5";
 
 function Header() {
   return (
-    <header className="w-full h-16 bg-white border-gray-200 flex items-center px-4">
+    <header className="fixed top-0 z-50 w-full h-12 bg-white  border border-gray-200 flex items-center px-4">
       {/* Left Section */}
-      <div className="flex items-center gap-4 w-1/4">
+      <div className="flex items-center gap-2 w-1/4">
         <button className="p-2  hover:bg-gray-100 rounded-full">☰</button>
         <header className="h-14 flex items-center">
           <h1 className="flex items-center text-xl font-semibold">
@@ -26,9 +26,9 @@ function Header() {
         <input
           type="text"
           placeholder="Search"
-          className="w-full h-10 px-4 border border-gray-300 rounded-l-full focus:outline-none"
+          className="w-3/4 h-8 px-4 border border-gray-300 rounded-l-full focus:outline-none"
         />
-        <button className="h-10 text-3xl px-6 border border-gray-300 rounded-r-full bg-gray-100 hover:bg-gray-200">
+        <button className="h-8 text-2xl px-6 border border-gray-300 rounded-r-full bg-gray-100 hover:bg-gray-200">
           <IoSearchOutline />
         </button>
       </div>

@@ -19,8 +19,11 @@ import { MdOutlineFeedback } from "react-icons/md";
 
 function SideBar() {
   return (
-    <aside className="w-45 p-2 text-xs ">
-      <ul className="space-y-1.5">
+    <aside className="mt-12 w-45 p-2 text-xs fixed h-screen
+    overflow-y-scroll 
+    scrollbar-thumb-gray-300
+    scrollbar-track-transparent">
+      <ul className="space-y-1">
         <span className="flex gap-4 items-center hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <TiHome />
@@ -135,7 +138,7 @@ function SideBar() {
         </li>
       </ul>
       <hr className="text-gray-300" />
-      <div className="flex text-xs flex-wrap gap-2 text-gray-600 p-1">
+      <div className="flex flex-wrap text-[10px] gap-1 text-gray-600 p-1">
         <p>About</p>
         <p>Press</p>
         <p>Copyright</p>
