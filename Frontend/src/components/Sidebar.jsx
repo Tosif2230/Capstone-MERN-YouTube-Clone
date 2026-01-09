@@ -16,20 +16,26 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { CiFlag1 } from "react-icons/ci";
 import { LuBadgeHelp } from "react-icons/lu";
 import { MdOutlineFeedback } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 function SideBar() {
+   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+
+  if (!isSidebarOpen) return null;
   return (
-    <aside className="mt-12 w-45 p-2 text-xs fixed h-screen
-    overflow-y-scroll 
+    <aside
+      className="w-48 top-14 left-0 text-xs fixed  h-[calc(100vh-56px)]
+    overflow-y-auto 
     scrollbar-thumb-gray-300
-    scrollbar-track-transparent">
+    scrollbar-track-transparent"
+    >
       <ul className="space-y-1">
-        <span className="flex gap-4 items-center hover:bg-gray-100 p-2.5 rounded-lg">
+        <li className="flex gap-4 items-center hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <TiHome />
           </span>
           <h1 className="font-semibold">Home</h1>
-        </span>
+        </li>
         <hr className="text-gray-300" />
         <h2 className="font-semibold hover:bg-gray-100 p-2.5 rounded-lg">
           Subscriptions
