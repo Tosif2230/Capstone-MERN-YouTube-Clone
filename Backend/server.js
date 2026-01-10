@@ -3,20 +3,22 @@ dotenv.config();
 
 import express from "express";
 import connectDB from "./config/db.js";
-
-
-const app = express();
-
-app.use(express.json());// MIddleware Parsing
+import authRoute from "./routes/auth.routes.js";
 
 // Connect DB
 connectDB();
 
-const PORT = process.env.PORT || 5050;
+const app = express();
+
+app.use(express.json()); // MIddleware Parsing
 
 app.get("/", (req, res) => {
   res.send("Root Path");
 });
+
+authRoute(app)
+
+const PORT = process.env.PORT || 5050;
 
 app.listen(PORT, () => {
   console.log(`Server connected at port ${PORT}`);
