@@ -8,7 +8,7 @@ const commentSchema = new mongoose.Schema(
             required: true,
         },
         userId: {
-            typr: mongoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true,
         },
@@ -20,6 +20,6 @@ const commentSchema = new mongoose.Schema(
     },
     {timestamps: true}
 )
-const CommentModel = mongoose.model("Comment", commentSchema),
+const CommentModel = mongoose.model("Comment", commentSchema);
 
 export default CommentModel;

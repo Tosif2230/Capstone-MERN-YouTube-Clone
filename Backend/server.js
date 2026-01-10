@@ -5,6 +5,7 @@ import express from "express";
 import connectDB from "./config/db.js";
 import authRoute from "./routes/auth.routes.js";
 import videoRoutes from "./routes/video.routes.js";
+import commentRoutes from "./routes/comment.routes.js";
 
 // Connect DB
 connectDB();
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 
 authRoute(app)
 videoRoutes(app)
+commentRoutes(app)
 
 const PORT = process.env.PORT || 5050;
 
