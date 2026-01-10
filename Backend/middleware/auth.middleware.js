@@ -5,8 +5,8 @@ export function authMiddleware(req,res,next){
     try{
         const header = req.headers.authorization;
 
-        if(!header || !header.startwith("JWT ")){
-            res.status(401).json({message: "Access Denied, No token provided."})
+        if(!header || !header.startWith("JWT ")){
+           return res.status(401).json({message: "Access Denied, No token provided."})
         }
         const  token = header.split(" ")[1];
 

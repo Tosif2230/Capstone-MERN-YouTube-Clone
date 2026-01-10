@@ -17,15 +17,13 @@ export async function registerUser(req, res) {
         email,
         password: bcrypt.hashSync(password, 10),
       });
-      const accessToken = jwt.sign(
-        {id: newUser._id, email: newUser.email},process.env.JWT_SECRET,{expiresIn:"1hr"}
-    )
+      
       return res.status(201).json({ message:"User Created",
         user:{
         id: newUser._id,
         userName: newUser.userName,
         email: newUser.email
-      },accessToken,
+      },
      });
     }
   } catch (error) {
@@ -35,10 +33,31 @@ export async function registerUser(req, res) {
 
 
 // User Login
-// export async function loginUser(req, res) {
-//   try {
-//     let { email, password } = req.body;
-//   } catch (err) {
-//     return res.status(500).json({ errorMessage: err });
-//   }
-// }
+export async function loginUser(req, res) {
+  try {
+    const { email, password } = req.body;
+
+    const user = await UserModel.findOne({email});
+      if(!user){
+        return res.status(401).json({message: "User Doesnot Exist"});
+      }
+      let validPassword = bcrypt.compareSync(password,user.password);
+        if(!validPassword){
+          return res.status(401).json({message: "Invalid Password"});
+        }
+    //JWT Token
+    const token = jwt.sign({id: user._id}, process.env.JWT_SECRET,{expiresIn:"1h"});
+
+    return res.status(200).json({
+      message: "Login successful",
+      user: {
+        id: user._id,
+        userName: user.userName,
+        email: user.email,
+      },
+      accessToken: token,
+    });
+  } catch (err) {
+    return res.status(500).json({ errorMessage: err });
+  }
+}
