@@ -9,7 +9,7 @@ import { commentSchema, updateSchema } from "../validations/comment.validation.j
     //Get all Comments
     app.get("/api/comments/:videoId", getComment )
     //Update comment by Id
-    app.put("/api/comments/update/:commentId",authMiddleware,validate(updateSchema), updateComment )
+    app.patch("/api/comments/update/:commentId",authMiddleware,validate(updateSchema), updateComment )
     //Delete comment by Id
     app.delete("/api/comments/delete/:commentId",authMiddleware, deleteComment )
  }
