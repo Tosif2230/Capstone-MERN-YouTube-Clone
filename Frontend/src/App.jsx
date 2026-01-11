@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./components/Header";
-import SideBar from "./components/SideBar";
-import Home from "./components/Home";
+import Header from "./components/Header.jsx";
+import SideBar from "./components/SideBar.jsx";
+import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -11,12 +11,8 @@ function App() {
       <Header />
       <div className="flex mt-12">
         <SideBar />
-        <main
-          className={`flex-1 p-4 transition-all ${
-            isSidebarOpen ? "ml-48" : "ml-0"
-          }`}
-        >
-          <Home />
+        <main className={`flex-1 p-4 transition-all ${isSidebarOpen ? "ml-48" : "ml-0"}`}>
+          <Outlet/>
         </main>
       </div>
     </>
