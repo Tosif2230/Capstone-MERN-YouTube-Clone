@@ -1,11 +1,13 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import Home from './Pages/Home.jsx'
 import { appStore } from './utils/appStore.js'
 import { Provider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Suspense } from 'react'
+import { lazy, Suspense } from 'react'
+
+//Lezy Lodaing
+const Home = lazy(()=> import('./Pages/Home.jsx') )   
 
 const routes = createBrowserRouter([
     {
