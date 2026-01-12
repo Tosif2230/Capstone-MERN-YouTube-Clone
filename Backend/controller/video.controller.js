@@ -33,7 +33,7 @@ export async function createVideo(req, res) {
 export async function getAllVideos(req, res) {
   try {
     const videos = await VideoModel.find()
-      .populate("uploader","userName")
+      .populate("uploader","fullName")
       .populate("channelId","channelName")
       .sort({createdAt: -1});
 

@@ -7,7 +7,7 @@ import authRoute from "./routes/auth.routes.js";
 import videoRoutes from "./routes/video.routes.js";
 import commentRoutes from "./routes/comment.routes.js";
 import channelRoutes from "./routes/channel.routes.js";
-
+import cors from "cors"
 
 // Connect DB
 connectDB();
@@ -15,7 +15,7 @@ connectDB();
 const app = express();
 
 app.use(express.json()); // MIddleware Parsing
-
+app.use(cors()) //Cors Middleware for connectiong backend to frontend
 app.get("/", (req, res) => {
   res.send("Root Path");
 });

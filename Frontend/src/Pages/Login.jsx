@@ -1,44 +1,110 @@
 import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [isLogin, setIsLogin] = useState(false);
+function Login() {
+  const [isLogin, setIsLogin] = useState(true);
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // const navigate = useNavigate();
+
+  function handleSignUp(e) {
+    e.preventDefault();
+
+    if (!fullName || !email || !password) {
+      alert("All fields required");
+      return;
+    }
+
+    const resp = fetch("http://localhost:5050/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userName: fullName,
+        email: email,
+        password: password,
+      }),
+    });
+    let result = resp.then((data) => data.json());
+    result.then((data) => {
+      alert("Registeration Done");
+      console.log(data, "Sign Up data")
+      setIsLogin(true);
+      setFullName("");
+      setEmail("");
+      setPassword("");
+    });
+  }
+
+  function handleLogin(e) {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert("All fields required");
+      return;
+    }
+
+    const resp = fetch("http://localhost:5050/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    let result = resp.then((data) => data.json());
+    result.then((data) => {
+      console.log(data, "login data")
+      localStorage.setItem("token", data.accessToken);
+      setEmail("");
+      setPassword("");
+     
+    });
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[url(https://images.unsplash.com/photo-1726409724841-016b6f4f8b1b?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)]">
+    <div className="bg-[url('/Youtube.jpg')] bg-cover min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
         <h2 className="text-2xl font-bold text-center mb-6 text-red-600">
           {isLogin ? "Login" : "Sign Up"}
         </h2>
+
         <form className="space-y-4">
           {!isLogin && (
             <input
               type="text"
-              name="name"
               placeholder="Full Name"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-              required
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg"
             />
           )}
 
           <input
             type="email"
-            name="email"
             placeholder="Email"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 border rounded-lg"
           />
 
           <input
             type="password"
-            name="password"
             placeholder="Password"
-            className="w-full px-4 py-2     border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-2 border rounded-lg"
           />
 
           <button
-            type="submit"
-            className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition"
+            type="button"
+            className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
+            onClick={!isLogin ? handleSignUp : handleLogin}
           >
             {isLogin ? "Login" : "Sign Up"}
           </button>
@@ -47,7 +113,6 @@ const Login = () => {
         <p className="text-sm text-center mt-4">
           {isLogin ? "Don't have an account?" : "Already have an account?"}
           <button
-            type="button"
             onClick={() => setIsLogin(!isLogin)}
             className="text-red-600 ml-1 hover:underline"
           >
@@ -57,6 +122,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;
