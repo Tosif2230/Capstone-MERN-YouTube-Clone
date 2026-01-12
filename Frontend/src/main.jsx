@@ -9,6 +9,7 @@ import NotFound from "./Pages/NotFound.jsx";
 
 //Lezy Lodaing
 const Home = lazy(() => import("./Pages/Home.jsx"));
+const Login = lazy(() => import("./Pages/Login.jsx"));
 
 const routes = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const routes = createBrowserRouter([
       },
     ],
     errorElement: <NotFound />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 

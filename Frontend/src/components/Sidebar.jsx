@@ -17,6 +17,7 @@ import { CiFlag1 } from "react-icons/ci";
 import { LuBadgeHelp } from "react-icons/lu";
 import { MdOutlineFeedback } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function SideBar() {
    const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
@@ -30,12 +31,14 @@ function SideBar() {
     scrollbar-track-transparent"
     >
       <ul className="space-y-1">
+        <Link to="/">
         <li className="flex gap-4 items-center hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <TiHome />
           </span>
           <h1 className="font-semibold">Home</h1>
         </li>
+        </Link>
         <hr className="text-gray-300" />
         <h2 className="font-semibold hover:bg-gray-100 p-2.5 rounded-lg">
           Subscriptions
