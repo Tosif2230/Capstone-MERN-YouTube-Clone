@@ -9,63 +9,74 @@ function Login() {
 
   const navigate = useNavigate();
 
-  function handleSignUp(e) {
-    e.preventDefault();
+async function handleSignUp(e) {
+  e.preventDefault();
 
-    if (!fullName || !email || !password) {
-      alert("All fields required");
-      return;
-    }
+  //Field check
+  if (!fullName || !email || !password) {
+    alert("All fields required");
+    return;
+  }
 
-    const resp = fetch("http://localhost:5050/api/register", {
+
+  try {
+    const resp = await fetch("http://localhost:5050/api/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         userName: fullName,
-        email: email,
-        password: password,
+        email,
+        password,
       }),
     });
-    let result = resp.then((data) => data.json());
-    result.then((data) => {
-      alert("Registeration Done");
-      console.log(data, "Sign Up data")
-      setIsLogin(true);
-      setFullName("");
-      setEmail("");
-      setPassword("");
-    });
-  }
 
-  function handleLogin(e) {
-    e.preventDefault();
+    const data = await resp.json();
 
-    if (!email || !password) {
-      alert("All fields required");
+    if (!resp.ok) {
+      alert(data.message);
       return;
     }
 
-    const resp = fetch("http://localhost:5050/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-    let result = resp.then((data) => data.json());
-    result.then((data) => {
-      console.log(data, "login data")
-      localStorage.setItem("token", data.accessToken);
-      setEmail("");
-      setPassword("");
-      navigate("/")
-    });
+    alert("Registration successful");
+    setIsLogin(true);
+  } catch (err) {
+    alert(err.message);
   }
+}
+
+
+  async function handleLogin(e) {
+  e.preventDefault();
+
+  //Field Check
+  if (!email || !password) {
+    alert("All fields required");
+    return;
+  }
+
+  try {
+    const resp = await fetch("http://localhost:5050/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await resp.json();
+
+    if (!resp.ok) {
+      alert(data.message);
+      return;
+    }
+
+    localStorage.setItem("token", data.accessToken);
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    navigate("/");//TNavigate use for back to Home Page
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
 
   return (
     <div className="bg-[url('/Youtube.jpg')] bg-cover min-h-screen flex items-center justify-center">

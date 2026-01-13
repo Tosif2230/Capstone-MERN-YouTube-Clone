@@ -3,7 +3,6 @@ import { Link, useRouteError } from "react-router-dom";
 
 function NotFound() {
   let err = useRouteError();
-  console.log(err.data);
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
       <div className="flex">
