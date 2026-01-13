@@ -14,10 +14,12 @@ export async function registerUser(req, res) {
         .status(409)
         .json({ message: "User already exist with this email" });
     } else {
+      const hashedPassword = await bcrypt.hash(password, 10);
+
       const newUser = await UserModel.create({
         userName,
         email,
-        password: bcrypt.hashSync(password, 10),
+        password: hashedPassword,
       });
 
       return res.status(201).json({
@@ -46,18 +48,20 @@ export async function loginUser(req, res) {
     }
 
     //password varification
-    let validPassword = bcrypt.compareSync(password, user.password);
+    const validPassword =  bcrypt.compareSync(password, user.password);
     if (!validPassword) {
       return res.status(401).json({ message: "Invalid Password" });
     }
 
     //JWT Token
     const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET,
       {
-        expiresIn: "1h",
-      }
+        id: user._id,
+        email: user.email,
+        userName: user.userName,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
     );
 
     return res.status(200).json({
@@ -70,6 +74,6 @@ export async function loginUser(req, res) {
       accessToken: token,
     });
   } catch (err) {
-    return res.status(500).json({ errorMessage: err });
+    return res.status(500).json({ message: "Login failed" });
   }
 }

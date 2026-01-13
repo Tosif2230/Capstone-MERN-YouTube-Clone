@@ -7,9 +7,10 @@ import {
   likeVideo,
   updateVideo,
 } from "../controller/video.controller.js";
+
 import { authMiddleware } from "../middleware/auth.middleware.js";
 import validate from "../middleware/validate.middleware.js";
-import { createvideoSchema } from "../validations/video.validation.js";
+import { createVideoSchema } from "../validations/video.validation.js";
 
 export default function videoRoutes(app) {
   // Public
@@ -20,15 +21,15 @@ export default function videoRoutes(app) {
   app.post(
     "/api/videos",
     authMiddleware,
-    validate(createvideoSchema),
+    validate(createVideoSchema),
     createVideo
   );
 
-  //Update Video
+  //Update and Delete (Only User)
   app.patch("/api/videos/:id", authMiddleware, updateVideo);
   app.delete("/api/videos/:id", authMiddleware, deleteVideo);
 
-  // Like / Dislike
+  //Like and dislike (Only User)
   app.post("/api/videos/:id/like", authMiddleware, likeVideo);
   app.post("/api/videos/:id/dislike", authMiddleware, dislikeVideo);
 }

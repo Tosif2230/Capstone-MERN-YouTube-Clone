@@ -89,7 +89,7 @@ export async function deleteComment(req, res) {
 
     //Owner Check
     if (comment.userId.toString() !== req.user.id) {
-      return res.status(404).josn({ message: "You are not allowed" });
+      return res.status(404).json({ message: "You are not allowed" });
     }
 
     await comment.deleteOne();

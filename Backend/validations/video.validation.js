@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createvideoSchema = z.object({
+export const createVideoSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
   thumbnailUrl: z.string().url("Invalid thumbnail URL"),

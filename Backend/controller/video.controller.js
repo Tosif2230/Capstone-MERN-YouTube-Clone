@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 import VideoModel from "../model/Video.model.js";
 
-
-// Create Video
+/* CREATE VIDEO */
 export async function createVideo(req, res) {
   try {
     const { title, description, thumbnailUrl, videoUrl, channelId, category } =
       req.body;
 
+    
     const video = await VideoModel.create({
       title,
       description,
@@ -18,16 +18,22 @@ export async function createVideo(req, res) {
       uploader: req.user.id,
     });
 
-    res.status(201).json({ message: "Video Uploded", video });
+    return res.status(201).json({
+      message: "Video Uploaded",
+      video,
+    });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to upload" });
+    return res.status(500).json({ message: "Failed to upload video" });
   }
 }
 
-// Get All Videos
+/* GET ALL VIDEOS */
 export async function getAllVideos(req, res) {
   try {
-    const { search, category } = req.query;
+    const { search, category, page = 1 } = req.query;
+
+    const limit = 10;
+    const skip = (page - 1) * limit;
 
     const query = {};
 
@@ -42,7 +48,9 @@ export async function getAllVideos(req, res) {
     const videos = await VideoModel.find(query)
       .populate("uploader", "userName")
       .populate("channelId", "channelName")
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
 
     return res.status(200).json(videos);
   } catch (error) {
@@ -50,10 +58,18 @@ export async function getAllVideos(req, res) {
   }
 }
 
-// Get Video by Id
+/* GET VIDEO BY ID + INCREMENT VIEWS */
 export async function getVideoById(req, res) {
   try {
-    const video = await VideoModel.findById(req.params.id)
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid video ID" });
+    }
+    const video = await VideoModel.findByIdAndUpdate(
+      id,
+      { $inc: { views: 1 } },
+      { new: true }
+    )
       .populate("uploader", "userName")
       .populate("channelId", "channelName");
 
@@ -61,17 +77,13 @@ export async function getVideoById(req, res) {
       return res.status(404).json({ message: "Video not found" });
     }
 
-    //Incriment Views
-    video.views += 1;
-    await video.save();
-
     return res.status(200).json(video);
   } catch (error) {
-    return res.status(500).json({ message: "Failed to fetch videos" });
+    return res.status(500).json({ message: "Failed to fetch video" });
   }
 }
 
-// UPDATE VIDEO (Only Owner)
+/* UPDATE VIDEO (OWNER ONLY) */
 export async function updateVideo(req, res) {
   try {
     const { id } = req.params;
@@ -89,25 +101,36 @@ export async function updateVideo(req, res) {
       return res.status(403).json({ message: "Not authorized" });
     }
 
-    Object.assign(video, req.body);
+    const allowedUpdates = [
+      "title",
+      "description",
+      "thumbnailUrl",
+      "videoUrl",
+      "category",
+    ];
+
+    allowedUpdates.forEach((field) => {
+      if (req.body[field] !== undefined) {
+        video[field] = req.body[field];
+      }
+    });
+
     await video.save();
 
-    return res.status(200).json({ message: "Video updated", video });
+    return res.status(200).json({
+      message: "Video updated",
+      video,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Failed to update video" });
   }
 }
 
-//Delete Video (Only Owner)
+/* DELETE VIDEO (OWNER ONLY) */
 export async function deleteVideo(req, res) {
   try {
-    const { id } = req.params;
+    const video = await VideoModel.findById(req.params.id);
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "Invalid video ID" });
-    }
-
-    const video = await VideoModel.findById(id);
     if (!video) {
       return res.status(404).json({ message: "Video not found" });
     }
@@ -117,6 +140,7 @@ export async function deleteVideo(req, res) {
     }
 
     await video.deleteOne();
+
     return res.status(200).json({ message: "Video deleted" });
   } catch (error) {
     return res.status(500).json({ message: "Failed to delete video" });
@@ -131,10 +155,29 @@ export async function likeVideo(req, res) {
       return res.status(404).json({ message: "Video not found" });
     }
 
-    video.likes += 1;
+    const userId = req.user.id;
+
+    const isLiked = video.likes.some((id) => id.toString() === userId);
+    const isDisliked = video.dislikes.some((id) => id.toString() === userId);
+
+    if (isDisliked) {
+      video.dislikes.pull(userId);
+    }
+
+    if (isLiked) {
+      video.likes.pull(userId);
+    } else {
+      video.likes.push(userId);
+    }
+
     await video.save();
 
-    return res.status(200).json({ likes: video.likes });
+    return res.status(200).json({
+      likes: video.likes.length,
+      dislikes: video.dislikes.length,
+      isLiked: video.likes.includes(userId),
+      isDisliked: video.dislikes.includes(userId),
+    });
   } catch (error) {
     return res.status(500).json({ message: "Failed to like video" });
   }
@@ -148,10 +191,29 @@ export async function dislikeVideo(req, res) {
       return res.status(404).json({ message: "Video not found" });
     }
 
-    video.dislikes += 1;
+    const userId = req.user.id;
+
+    const isLiked = video.likes.some((id) => id.toString() === userId);
+    const isDisliked = video.dislikes.some((id) => id.toString() === userId);
+
+    if (isDisliked) {
+      video.dislikes.pull(userId);
+    }
+
+    if (isLiked) {
+      video.likes.pull(userId);
+    } else {
+      video.likes.push(userId);
+    }
+
     await video.save();
 
-    return res.status(200).json({ dislikes: video.dislikes });
+    return res.status(200).json({
+      likes: video.likes.length,
+      dislikes: video.dislikes.length,
+      isLiked: video.likes.includes(userId),
+      isDisliked: video.dislikes.includes(userId),
+    });
   } catch (error) {
     return res.status(500).json({ message: "Failed to dislike video" });
   }

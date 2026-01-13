@@ -1,5 +1,7 @@
 import ChannelModel from "../model/Channel.model.js";
 import VideoModel from "../model/Video.model.js";
+import UserModel from "../model/User.model.js";
+
 
 //Create Channel
 export async function createChannel(req, res) {
@@ -11,7 +13,7 @@ export async function createChannel(req, res) {
     });
 
     if (existingChannel) {
-      return res.status(401).json({ message: "User already has a channel" });
+      return res.status(409).json({ message: "User already has a channel" });
     }
 
     const channel = await ChannelModel.create({
@@ -19,6 +21,10 @@ export async function createChannel(req, res) {
       channelBanner,
       description,
       owner: req.user.id,
+    });
+
+    await UserModel.findByIdAndUpdate(req.user.id, {
+      $push: { channels: channel._id },
     });
 
     return res.status(201).json({ message: "Channel created", channel });
