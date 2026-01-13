@@ -53,31 +53,31 @@ function SideBar() {
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <CgPlayList />
-          </span>{" "}
+          </span>
           Playlists
         </li>
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <MdOutlineWatchLater />
-          </span>{" "}
+          </span>
           Watch later
         </li>
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <AiOutlineLike />
-          </span>{" "}
+          </span>
           Liked videos
         </li>
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <GoVideo />
-          </span>{" "}
+          </span>
           Your videos
         </li>
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <LiaDownloadSolid />
-          </span>{" "}
+          </span>
           Downloads
         </li>
         <hr className="text-gray-300" />
@@ -87,13 +87,13 @@ function SideBar() {
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <BiShoppingBag />
-          </span>{" "}
+          </span>
           Shopping
         </li>
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <PiMusicNote />
-          </span>{" "}
+          </span>
           Music
         </li>
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">
@@ -105,7 +105,7 @@ function SideBar() {
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">
           <span className="text-xl">
             <SiYoutubegaming />
-          </span>{" "}
+          </span>
           Gaming
         </li>
         <li className="flex gap-4 items-center text-[12px] hover:bg-gray-100 p-2.5 rounded-lg">

@@ -1,82 +1,93 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../utils/authSlice";
+
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-async function handleSignUp(e) {
-  e.preventDefault();
+  async function handleSignUp(e) {
+    e.preventDefault();
 
-  //Field check
-  if (!fullName || !email || !password) {
-    alert("All fields required");
-    return;
-  }
-
-
-  try {
-    const resp = await fetch("http://localhost:5050/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userName: fullName,
-        email,
-        password,
-      }),
-    });
-
-    const data = await resp.json();
-
-    if (!resp.ok) {
-      alert(data.message);
+    if (!fullName || !email || !password) {
+      alert("All fields required");
       return;
     }
 
-    alert("Registration successful");
-    setIsLogin(true);
-  } catch (err) {
-    alert(err.message);
-  }
-}
+    try {
+      const resp = await fetch("http://localhost:5050/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: fullName,
+          email,
+          password,
+        }),
+      });
 
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        alert(data.message || "Registration failed");
+        return;
+      }
+
+      alert("Registration Done");
+      setIsLogin(true);
+      setFullName("");
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      alert("Server error");
+    }
+  }
 
   async function handleLogin(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  //Field Check
-  if (!email || !password) {
-    alert("All fields required");
-    return;
-  }
-
-  try {
-    const resp = await fetch("http://localhost:5050/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await resp.json();
-
-    if (!resp.ok) {
-      alert(data.message);
+    if (!email || !password) {
+      alert("All fields required");
       return;
     }
 
-    localStorage.setItem("token", data.accessToken);
-    localStorage.setItem("user", JSON.stringify(data.user));
+    try {
+      const resp = await fetch("http://localhost:5050/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-    navigate("/");//TNavigate use for back to Home Page
-  } catch (err) {
-    alert(err.message);
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        alert(data.message || "Login failed");
+        return;
+      }
+
+      dispatch(
+      loginSuccess({
+        user: data.user,
+        token: data.accessToken,
+      })
+    );
+      navigate("/");
+    } catch (error) {
+      alert(error.message);
+    }
   }
-}
-
 
   return (
     <div className="bg-[url('/Youtube.jpg')] bg-cover min-h-screen flex items-center justify-center">
@@ -91,6 +102,7 @@ async function handleSignUp(e) {
               type="text"
               placeholder="Full Name"
               value={fullName}
+              required
               onChange={(e) => setFullName(e.target.value)}
               className="w-full px-4 py-2 border rounded-lg"
             />

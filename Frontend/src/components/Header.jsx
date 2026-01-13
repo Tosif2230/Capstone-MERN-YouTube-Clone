@@ -1,15 +1,20 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar } from "../utils/appSlice.js";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { GoSignOut } from "react-icons/go";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { PiMicrophone } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { logout } from "../utils/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const dispatch = useDispatch();
-
+  const { isAuth, user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  // console.log(user)
   return (
     <header className="fixed top-0 z-50 w-full h-12 bg-white flex items-center px-4">
       {/* Left Section */}
@@ -53,14 +58,32 @@ function Header() {
           <BsThreeDotsVertical />
         </button>
 
-        <Link to="/login">
-          <button className="flex font-semibold border cursor-pointer border-gray-300 rounded-3xl m-3 p-1 text-blue-600 items-center">
-            <span className="text-2xl">
-              <RiAccountCircleLine />
-            </span>
-            <span>Sign in</span>
-          </button>
-        </Link>
+        {!isAuth ? (
+          <Link to="/login">
+            <button className="flex font-semibold border cursor-pointer border-gray-300 rounded-3xl m-3 p-1 text-blue-600 items-center gap-1">
+              <RiAccountCircleLine className="text-2xl" />
+              <span>Sign in</span>
+            </button>
+          </Link>
+        ) : (
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => {
+                navigate(`/channel/${user?.channels?.[0] || user?.id}`);
+              }}
+              className="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm"
+            >
+              My Channel
+            </button>
+            <span className="font-semibold text-sm">{user?.userName}</span>
+            <button
+              onClick={() => dispatch(logout())}
+              className="text-xl  border-red-600 text-red-500"
+            >
+              <GoSignOut />
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );
