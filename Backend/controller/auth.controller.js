@@ -34,7 +34,6 @@ export async function registerUser(req, res) {
   }
 }
 
-
 // User Login
 export async function loginUser(req, res) {
   try {

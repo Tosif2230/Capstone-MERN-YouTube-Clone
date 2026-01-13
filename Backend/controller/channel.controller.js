@@ -28,7 +28,7 @@ export async function createChannel(req, res) {
 }
 
 //Get Channel by Id
-export async function getChannelById(req,res) {
+export async function getChannelById(req, res) {
   try {
     const channel = await ChannelModel.findById(req.params.id).populate(
       "owner",
@@ -45,7 +45,7 @@ export async function getChannelById(req,res) {
   }
 }
 //Get Video by Channel
-export async function getVideosByChannel(req,res) {
+export async function getVideosByChannel(req, res) {
   try {
     const videos = await VideoModel.find({
       channelId: req.params.id,
