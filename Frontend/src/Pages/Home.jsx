@@ -7,7 +7,7 @@ function Home() {
 
   return (
     <div>
-      <Filterbar
+      <Filterbar 
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />

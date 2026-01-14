@@ -16,7 +16,7 @@ function Filterbar({ selectedCategory, setSelectedCategory }) {
   ];
 
   return (
-    <div className="flex overflow-x-auto mb-4">
+    <div className="flex z-50 top-12 fixed bg-white w-full">
       <ul className="flex gap-3">
         {categories.map((item) => (
           <li

@@ -43,13 +43,11 @@ function Watch() {
           <div className="flex gap-2">
             <button className="px-3 py-1 bg-gray-200 rounded-full">
               <span className="flex items-center gap-2">
-                {" "}
                 <AiOutlineLike /> {video.likes.toLocaleString()}
               </span>
             </button>
             <button className="px-3 py-1 bg-gray-200 rounded-full">
               <span className="flex items-center gap-2">
-                {" "}
                 <AiOutlineDislike /> {video.dislikes.toLocaleString()}
               </span>
             </button>

@@ -24,16 +24,18 @@ function Header() {
         >
           ☰
         </button>
-        <div className="h-14 flex items-center">
-          <h1 className="flex items-center text-xl font-semibold cursor-pointer">
-            <img
-              src="https://www.youtube.com/s/desktop/12b1ec61/img/favicon_32x32.png"
-              alt="YouTube"
-              className="h-6 w-auto"
-            />
-            YouTube Clone
-          </h1>
-        </div>
+        <Link to="/">
+          <div className="h-14 flex items-center">
+            <h1 className="flex items-center text-xl font-semibold cursor-pointer">
+              <img
+                src="https://www.youtube.com/s/desktop/12b1ec61/img/favicon_32x32.png"
+                alt="YouTube"
+                className="h-6 w-auto"
+              />
+              YouTube Clone
+            </h1>
+          </div>
+        </Link>
       </div>
 
       {/* Center Section */}
