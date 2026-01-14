@@ -1,11 +1,13 @@
-import React from 'react'
-
-function Filterbar() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default Filterbar
+export const catagory = [
+  "All",
+  "HTML",
+  "CSS",
+  "C",
+  "Python",
+  "React",
+  "Java",
+  "NodeJS",
+  "MongoDB",
+  "ExpressJS",
+  "Gaming"
+]
