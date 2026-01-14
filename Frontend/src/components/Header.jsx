@@ -8,12 +8,11 @@ import { IoSearchOutline } from "react-icons/io5";
 import { PiMicrophone } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { logout } from "../utils/authSlice";
-import { useNavigate } from "react-router-dom";
 
 function Header() {
   const dispatch = useDispatch();
   const { isAuth, user } = useSelector((state) => state.auth);
-  const navigate = useNavigate();
+
   // console.log(user)
   return (
     <header className="fixed top-0 z-50 w-full h-12 bg-white flex items-center px-4">
@@ -67,14 +66,6 @@ function Header() {
           </Link>
         ) : (
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                navigate(`/channel/${user?.channels?.[0] || user?.id}`);
-              }}
-              className="w-full text-blue-800 px-3 py-2 hover:underline text-[10px] cursor-pointer"
-            >
-              View Your Channel
-            </button>
             <span className="font-semibold text-sm">{user?.userName}</span>
             <button
               onClick={() => dispatch(logout())}

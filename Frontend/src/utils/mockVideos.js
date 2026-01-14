@@ -1,16 +1,22 @@
 export const videosData = [
   {
-    videoId: "video01",
+    _id: "video01",
     title: "C Programming Full Course",
     videoUrl: "https://www.youtube.com/watch?v=irqbmMNs2Bo",
     thumbnailUrl: "https://i.ytimg.com/vi/irqbmMNs2Bo/hqdefault.jpg",
     description: "Complete C programming tutorial for beginners.",
-    channelId: "ApnaCollegeOfficial",
-    uploader: "Apna College",
+    channelId: {
+      _id: "channel01",
+      channelName:"ApnaCollegeOfficial",
+    },
+    uploader: {
+      _id: "user1",
+      user: "Apna College",
+    },
     views: 50115782,
     likes: 693000,
     dislikes: 18427,
-    uploadDate: "2022-03-06",
+    createdAt: "2022-03-06",
     category: "C",
     comments: [
       {
@@ -23,17 +29,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video02",
+    _id: "video02",
     title: "C Pointers Explained",
     videoUrl: "https://www.youtube.com/watch?v=KJgsSFOSQv0",
     thumbnailUrl: "https://i.ytimg.com/vi/KJgsSFOSQv0/hqdefault.jpg",
     description: "Understand pointers in C with simple examples.",
-    channelId: "freecodecamp",
-    uploader: "freecodecamp.org",
+    channelId: {
+      _id: "channel02",
+      channelName:"freecodecamp",
+    },
+    uploader: {
+      _id: "user2",
+      user: "freecodecamp.org",
+    },
     views: 18324275,
     likes: 234000,
     dislikes: 90,
-    uploadDate: "2018-08-15",
+    createdAt: "2018-08-15",
     category: "C",
     comments: [
       {
@@ -46,17 +58,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video03",
+    _id: "video03",
     title: "Every React Concept Explained in 12 Minutes",
     videoUrl: "https://www.youtube.com/watch?v=wIyHSOugGGw",
     thumbnailUrl: "https://i.ytimg.com/vi/wIyHSOugGGw/hqdefault.jpg",
     description: "Learn React programming from basics to advanced.",
-    channelId: "channelCPP01",
-    uploader: "Code Bootcamp",
+    channelId: {
+      _id: "channel03",
+      channelName:"channelCPP01",
+    },
+    uploader: {
+      _id: "user03",
+      user: "Code Bootcamp",
+    },
     views: 1589534,
     likes: 66000,
     dislikes: 210,
-    uploadDate: "2024-03-18",
+    createdAt: "2024-03-18",
     category: "React",
     comments: [
       {
@@ -68,19 +86,24 @@ export const videosData = [
     ],
   },
 
-  
   {
-    videoId: "video05",
+    _id: "video04",
     title: "Java Full Course",
     videoUrl: "https://www.youtube.com/watch?v=xk4_1vDrzzo",
     thumbnailUrl: "https://i.ytimg.com/vi/xk4_1vDrzzo/hqdefault.jpg",
     description: "Complete Java programming course in one video.",
-    channelId: "BroCodez",
-    uploader: "Bro Code",
+    channelId: {
+      _id: "channel04",
+      channelName:"BroCodez",
+    },
+    uploader: {
+      _id: "user04",
+      user: "Bro Code",
+    },
     views: 13300921,
     likes: 24000,
     dislikes: 300,
-    uploadDate: "2020-09-9",
+    createdAt: "2020-09-9",
     category: "Java",
     comments: [
       {
@@ -93,17 +116,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video06",
+    _id: "video05",
     title: "Java OOP Concepts",
     videoUrl: "https://www.youtube.com/watch?v=6T_HgnjoYwM",
     thumbnailUrl: "https://i.ytimg.com/vi/6T_HgnjoYwM/hqdefault.jpg",
     description: "Object-oriented programming concepts in Java.",
-    channelId: "SimplilearnOfficial",
-    uploader: "Simplilearn",
+    channelId: {
+      _id: "channel05",
+      channelName:"SimplilearnOfficial",
+    },
+    uploader: {
+      _id: "user05",
+      user: "Simplilearn",
+    },
     views: 504412,
     likes: 11300,
     dislikes: 95,
-    uploadDate: "2021-03-16",
+    createdAt: "2021-03-16",
     category: "Java",
     comments: [
       {
@@ -116,17 +145,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video07",
+    _id: "video06",
     title: "Python for Beginners",
     videoUrl: "https://www.youtube.com/watch?v=_uQrJ0TkZlc",
     thumbnailUrl: "https://i.ytimg.com/vi/_uQrJ0TkZlc/hqdefault.jpg",
     description: "Python basics for absolute beginners.",
-    channelId: "programmingwithmosh",
-    uploader: "Programming with Mosh",
+    channelId: {
+      _id: "channel06",
+      channelName:"programmingwithmosh",
+    },
+    uploader: {
+      _id: "user06",
+      user: "Programming with Mosh",
+    },
     views: 46708721,
     likes: 125940,
     dislikes: 420,
-    uploadDate: "2019-02-18",
+    createdAt: "2019-02-18",
     category: "Python",
     comments: [
       {
@@ -139,17 +174,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video08",
+    _id: "video07",
     title: "Python Tutorial for Beginners 4: Lists, Tuples, and Sets",
     videoUrl: "https://www.youtube.com/watch?v=W8KRzm-HUcc",
     thumbnailUrl: "https://i.ytimg.com/vi/W8KRzm-HUcc/hqdefault.jpg",
     description: "Learn lists and tuples in Python.",
-    channelId: "coreyms",
-    uploader: "Corey Schafer",
+    channelId: {
+      _id: "channel07",
+      channelName:"coreyms",
+    },
+    uploader: {
+      _id: "user7",
+      user: "Corey Schafer",
+    },
     views: 1703124,
     likes: 40000,
     dislikes: 130,
-    uploadDate: "2017-05-17",
+    createdAt: "2017-05-17",
     category: "Python",
     comments: [
       {
@@ -162,17 +203,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video09",
+    _id: "video08",
     title: "ExpressJS Crash Course",
     videoUrl: "https://www.youtube.com/watch?v=L72fhGm1tfE",
     thumbnailUrl: "https://i.ytimg.com/vi/L72fhGm1tfE/hqdefault.jpg",
     description: "Build REST APIs using ExpressJS.",
-    channelId: "TraversyMedia",
-    uploader: "Traversy Media",
+    channelId: {
+      _id: "channel08",
+      channelName:"TraversyMedia",
+    },
+    uploader: {
+      _id: "user8",
+      user: "Traversy Media",
+    },
     views: 989511,
     likes: 20000,
     dislikes: 160,
-    uploadDate: "2019-02-22",
+    createdAt: "2019-02-22",
     category: "ExpressJS",
     comments: [
       {
@@ -185,17 +232,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video10",
+    _id: "video09",
     title: "NodeJS Crash Course",
     videoUrl: "https://www.youtube.com/watch?v=fBNz5xF-Kx4",
     thumbnailUrl: "https://i.ytimg.com/vi/fBNz5xF-Kx4/hqdefault.jpg",
     description: "Learn NodeJS fundamentals.",
-    channelId: "TraversyMedia",
-    uploader: "Traversy Media",
+    channelId: {
+      _id: "channel09",
+      channelName:"TraversyMedia",
+    },
+    uploader: {
+      _id: "user9",
+      user: "Traversy Media",
+    },
     views: 1693609,
     likes: 35000,
     dislikes: 250,
-    uploadDate: "2019-02-07",
+    createdAt: "2019-02-07",
     category: "NodeJS",
     comments: [
       {
@@ -208,17 +261,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video11",
+    _id: "video10",
     title: "HTML Full Course",
     videoUrl: "https://www.youtube.com/watch?v=pQN-pnXPaVg",
     thumbnailUrl: "https://i.ytimg.com/vi/pQN-pnXPaVg/hqdefault.jpg",
     description: "Complete HTML tutorial for web development.",
-    channelId: "freeCodeCamp",
-    uploader: "freeCodeCamp.org",
+    channelId: {
+      _id: "channel10",
+      channelName:"freeCodeCamp",
+    },
+    uploader: {
+      _id: "user10",
+      user: "freeCodeCamp.org",
+    },
     views: 7607519,
     likes: 175000,
     dislikes: 310,
-    uploadDate: "2018-07-18",
+    createdAt: "2018-07-18",
     category: "HTML",
     comments: [
       {
@@ -231,17 +290,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video12",
+    _id: "video11",
     title: "CSS Flexbox & Grid",
     videoUrl: "https://www.youtube.com/watch?v=JJSoEo8JSnc",
     thumbnailUrl: "https://i.ytimg.com/vi/JJSoEo8JSnc/hqdefault.jpg",
     description: "Master Flexbox and Grid layouts.",
-    channelId: "TraversyMedia",
-    uploader: "Traversy Media",
+    channelId: {
+      _id: "channel11",
+      channelName:"TraversyMedia",
+    },
+    uploader: {
+      _id: "user11",
+      user: "Traversy Media",
+    },
     views: 1847000,
     likes: 42000,
     dislikes: 180,
-    uploadDate: "2016-12-09",
+    createdAt: "2016-12-09",
     category: "CSS",
     comments: [
       {
@@ -254,17 +319,23 @@ export const videosData = [
   },
 
   {
-    videoId: "video13",
+    _id: "video12",
     title: "MongoDB Full Course",
     videoUrl: "https://www.youtube.com/watch?v=ofme2o29ngU",
     thumbnailUrl: "https://i.ytimg.com/vi/ofme2o29ngU/hqdefault.jpg",
     description: "Learn MongoDB from scratch.",
-    channelId: "WebDevSimplified",
-    uploader: "Web Dev Simplified",
+    channelId: {
+      _id: "channel12",
+      channelName:"WebDevSimplified",
+    },
+    uploader: {
+      _id: "user12",
+      user: "Web Dev Simplified",
+    },
     views: 856747,
     likes: 24000,
     dislikes: 240,
-    uploadDate: "2021-09-18",
+    createdAt: "2021-09-18",
     category: "MongoDB",
     comments: [
       {
@@ -277,17 +348,24 @@ export const videosData = [
   },
 
   {
-    videoId: "video14",
-    title: "🎮 How to Become a Game Developer | Complete Roadmap for Game Development 🎮",
+    _id: "video13",
+    title:
+      "🎮 How to Become a Game Developer | Complete Roadmap for Game Development 🎮",
     videoUrl: "https://www.youtube.com/watch?v=qPxvmrtTQ_4",
     thumbnailUrl: "https://i.ytimg.com/vi/qPxvmrtTQ_4/hqdefault.jpg",
     description: "Comment #HarryBhai if you read this 😉😉",
-    channelId: "CodeWithHarry",
-    uploader: "CodeWithHarry",
+    channelId: {
+      _id: "channel13",
+      channelName:"CodeWithHarry",
+    },
+    uploader: {
+      _id: "user13",
+      user: "CodeWithHarry",
+    },
     views: 1026612,
     likes: 34000,
     dislikes: 125,
-    uploadDate: "2024-03-17",
+    createdAt: "2024-03-17",
     category: "Gaming",
     comments: [
       {
@@ -300,17 +378,25 @@ export const videosData = [
   },
 
   {
-    videoId: "video15",
-    title: "BECOME A GAME DEVELOPER IN 3 MONTHS | 3 MONTH GAME DEVELOPMENT LEARNING PLAN (Urdu/Hindi)",
+    _id: "video14",
+    title:
+      "BECOME A GAME DEVELOPER IN 3 MONTHS | 3 MONTH GAME DEVELOPMENT LEARNING PLAN (Urdu/Hindi)",
     videoUrl: "https://www.youtube.com/watch?v=TgfKGT7_ID0",
     thumbnailUrl: "https://i.ytimg.com/vi/TgfKGT7_ID0/hqdefault.jpg",
-    description: "BECOME A GAME DEVELOPER IN 3 MONTHS | 3 MONTH GAME DEVELOPMENT LEARNING PLAN (Urdu/Hindi)",
-    channelId: "nafay3d",
-    uploader: "Nafay 3D",
+    description:
+      "BECOME A GAME DEVELOPER IN 3 MONTHS | 3 MONTH GAME DEVELOPMENT LEARNING PLAN (Urdu/Hindi)",
+    channelId: {
+      _id: "channel14",
+      channelName:"nafay3d",
+    },
+    uploader: {
+      _id: "user14",
+      user: "Nafay 3D",
+    },
     views: 51399,
     likes: 26000,
     dislikes: 102,
-    uploadDate: "2024-12-04",
+    createdAt: "2024-12-04",
     category: "Gaming",
     comments: [
       {
