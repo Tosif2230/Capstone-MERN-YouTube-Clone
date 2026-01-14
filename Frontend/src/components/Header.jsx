@@ -71,9 +71,9 @@ function Header() {
               onClick={() => {
                 navigate(`/channel/${user?.channels?.[0] || user?.id}`);
               }}
-              className="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm"
+              className="w-full text-blue-800 px-3 py-2 hover:underline text-[10px] cursor-pointer"
             >
-              My Channel
+              View Your Channel
             </button>
             <span className="font-semibold text-sm">{user?.userName}</span>
             <button

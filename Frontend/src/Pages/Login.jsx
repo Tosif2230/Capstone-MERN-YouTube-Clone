@@ -3,23 +3,38 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../utils/authSlice";
 
-
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!isLogin && !fullName.trim()) {
+      newErrors.fullName = "Full name is required";
+    }
+
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!password.trim()) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   async function handleSignUp(e) {
     e.preventDefault();
 
-    if (!fullName || !email || !password) {
-      alert("All fields required");
-      return;
-    }
-
+    if (!validate()) return;
     try {
       const resp = await fetch("http://localhost:5050/api/register", {
         method: "POST",
@@ -45,19 +60,14 @@ function Login() {
       setFullName("");
       setEmail("");
       setPassword("");
-    } catch (error) {
+    } catch {
       alert("Server error");
     }
   }
 
   async function handleLogin(e) {
     e.preventDefault();
-
-    if (!email || !password) {
-      alert("All fields required");
-      return;
-    }
-
+    if (!validate()) return;
     try {
       const resp = await fetch("http://localhost:5050/api/login", {
         method: "POST",
@@ -78,11 +88,11 @@ function Login() {
       }
 
       dispatch(
-      loginSuccess({
-        user: data.user,
-        token: data.accessToken,
-      })
-    );
+        loginSuccess({
+          user: data.user,
+          token: data.accessToken,
+        })
+      );
       navigate("/");
     } catch (error) {
       alert(error.message);
@@ -98,14 +108,18 @@ function Login() {
 
         <form className="space-y-4">
           {!isLogin && (
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={fullName}
-              required
-              onChange={(e) => setFullName(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg"
-            />
+            <>
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full px-4 py-2 border rounded-lg"
+              />
+              {errors.fullName && (
+                <p className="text-red-500 text-sm">{errors.fullName}</p>
+              )}
+            </>
           )}
 
           <input
@@ -115,6 +129,9 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-2 border rounded-lg"
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email}</p>
+          )}
 
           <input
             type="password"
@@ -123,6 +140,9 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 border rounded-lg"
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password}</p>
+          )}
 
           <button
             type="button"
