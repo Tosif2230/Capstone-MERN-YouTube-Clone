@@ -4,6 +4,7 @@ import { videosData } from "../utils/mockVideos";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { RiShareForwardLine } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { getEmbedUrl } from "../utils/youtube.js";
 
 function Watch() {
   const { id } = useParams();
@@ -20,9 +21,10 @@ function Watch() {
       {/* LEFT: MAIN VIDEO */}
       <div className="w-[70%]">
         <iframe
-          className="w-full h-112.5 rounded-xl"
-          src={`https://www.youtube.com/embed/${video.videoUrl.split("v=")[1]}`}
+          className="w-full aspect-video rounded-xl"
+          src={getEmbedUrl(video.videoUrl)}
           title={video.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
 
