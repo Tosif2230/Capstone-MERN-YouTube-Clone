@@ -56,7 +56,7 @@ function Header() {
 
         <button
           onClick={handleSearch}
-          className="h-8 px-5 border border-gray-300 rounded-r-full bg-gray-100 hover:bg-gray-200"
+          className="h-7 px-5 border border-gray-300 rounded-r-full bg-gray-100 hover:bg-gray-200"
         >
           <IoSearchOutline />
         </button>
