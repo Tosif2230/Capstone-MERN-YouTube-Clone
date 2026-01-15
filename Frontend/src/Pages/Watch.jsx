@@ -72,13 +72,13 @@ function Watch() {
             <h2 className="font-semibold mb-3 text-sm">
               {video.comments.length} Comments
             </h2>
-
+            
             <input
               type="text"
               placeholder="Add a comment..."
               className="w-full outline-none border-b pb-2 text-sm"
             />
-
+            <button className="bg-gray-700 rounded text-sm px-2 py-1 mt-2">comment</button>
             <div className="mt-4 space-y-4">
               {video.comments.map((comment) => (
                 <div

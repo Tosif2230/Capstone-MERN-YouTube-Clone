@@ -42,6 +42,9 @@ function Channel() {
         <button className="mt-3 bg-black text-white px-4 py-1 rounded-full text-sm">
           Subscribe
         </button>
+        <button className="mt-3 bg-red-600 text-white px-4 py-1 rounded-full text-sm">
+          Upload Video
+        </button>
       </div>
     </div>
 
