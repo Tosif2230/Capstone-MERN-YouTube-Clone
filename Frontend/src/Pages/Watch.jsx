@@ -106,7 +106,7 @@ function Watch() {
               <img
                 src={v.thumbnailUrl}
                 alt={v.title}
-                className="w-40 h-24 object-cover rounded-lg"
+                className="w-40 object-cover rounded-lg"
               />
               <div>
                 <h3 className="text-sm font-semibold line-clamp-2">
