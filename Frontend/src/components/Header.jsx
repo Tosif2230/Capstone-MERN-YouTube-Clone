@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar } from "../utils/appSlice.js";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -6,14 +6,21 @@ import { GoSignOut } from "react-icons/go";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { PiMicrophone } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../utils/authSlice";
 
 function Header() {
   const dispatch = useDispatch();
   const { isAuth, user } = useSelector((state) => state.auth);
+  const hasChannel = !!user?.channelId;
+  const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate();
 
-  // console.log(user)
+  const handleSearch = () => {
+    if (!searchText.trim()) return;
+    navigate(`/?search=${encodeURIComponent(searchText.trim())}`);
+  };
+
   return (
     <header className="fixed top-0 z-50 w-full h-12 bg-white flex items-center px-4">
       {/* Left Section */}
@@ -43,11 +50,21 @@ function Header() {
         <input
           type="text"
           placeholder="Search"
-          className="w-[55%] text-xs cursor-text h-7 px-4 border border-gray-300 rounded-l-full focus:outline-none"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSearch();
+          }}
+          className="w-[55%] text-xs h-7 px-4 border border-gray-300 rounded-l-full focus:outline-none"
         />
-        <button className="h-7 text-2xl px-6 border cursor-pointer border-gray-300 rounded-r-full bg-gray-100 hover:bg-gray-200">
+
+        <button
+          onClick={handleSearch}
+          className="h-7 text-2xl px-6 border border-gray-300 rounded-r-full bg-gray-100 hover:bg-gray-200"
+        >
           <IoSearchOutline />
         </button>
+
         <button className="m-4 p-1 text-xl rounded-full bg-gray-100 cursor-pointer hover:bg-gray-200">
           <PiMicrophone />
         </button>
@@ -58,7 +75,21 @@ function Header() {
         <button className="text-2xl cursor-pointer">
           <BsThreeDotsVertical />
         </button>
-
+        {isAuth &&
+          (hasChannel ? (
+            <Link to={`/channel/${user.channelId}`}>
+              <button className="text-sm font-semibold px-3 py-1 rounded-full hover:bg-gray-100">
+                My Channel
+              </button>
+            </Link>
+          ) : (
+            <button
+              onClick={() => navigate("/create-channel")}
+              className="text-sm font-semibold px-3 py-1 rounded-full hover:bg-gray-100"
+            >
+              Create Channel
+            </button>
+          ))}
         {!isAuth ? (
           <Link to="/login">
             <button className="flex font-semibold border cursor-pointer border-gray-300 rounded-3xl m-3 p-1 text-blue-600 items-center gap-1">

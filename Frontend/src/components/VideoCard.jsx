@@ -15,7 +15,7 @@ function VideoCard({ video }) {
           <h3 className="text-sm font-semibold line-clamp-2">
             {video.title}
           </h3>
-          <p className="text-xs text-gray-600">{video.uploader.userName}</p>
+          <p className="text-xs text-gray-600">{video.uploader.user}</p>
           <p className="text-xs text-gray-500">
             {video.views.toLocaleString()} views
           </p>

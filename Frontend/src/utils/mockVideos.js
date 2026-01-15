@@ -65,7 +65,7 @@ export const videosData = [
     description: "Learn React programming from basics to advanced.",
     channelId: {
       _id: "channel03",
-      channelName:"channelCPP01",
+      channelName:"Code Bootcamp",
     },
     uploader: {
       _id: "user03",

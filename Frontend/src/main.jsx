@@ -12,6 +12,7 @@ const Home = lazy(() => import("./Pages/Home.jsx"));
 const Login = lazy(() => import("./Pages/Login.jsx"));
 const Watch = lazy(() => import("./Pages/Watch.jsx"));
 const Channel = lazy(() => import("./Pages/Channel.jsx"));
+const CreateChannel = lazy(() => import("./Pages/CreateChannel.jsx"));
 
 const routes = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const routes = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/create-channel",
+    element: <CreateChannel />,
   },
 ]);
 

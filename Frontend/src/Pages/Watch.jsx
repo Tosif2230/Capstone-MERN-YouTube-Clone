@@ -19,9 +19,12 @@ function Watch() {
     <div className="flex gap-5">
       {/* LEFT: MAIN VIDEO */}
       <div className="w-[70%]">
-        <video controls autoPlay className="w-full h-115 bg-black rounded-xl">
-          <source src={video.videoUrl} />
-        </video>
+        <iframe
+          className="w-full h-112.5 rounded-xl"
+          src={`https://www.youtube.com/embed/${video.videoUrl.split("v=")[1]}`}
+          title={video.title}
+          allowFullScreen
+        />
 
         <h1 className="text-lg font-bold mt-4">{video.title}</h1>
 
