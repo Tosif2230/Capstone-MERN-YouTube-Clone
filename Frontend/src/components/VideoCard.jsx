@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 function VideoCard({ video }) {
   return (
-    <Link to={`/watch/${video._id}`}>
-      <div className="cursor-pointer">
+    <Link to={`/watch/${video._id}`} className="block">
+      <div className="cursor-pointer group">
         <img
           src={video.thumbnailUrl}
           alt={video.title}

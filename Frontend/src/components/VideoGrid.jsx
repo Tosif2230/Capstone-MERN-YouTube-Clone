@@ -15,7 +15,7 @@ function VideoGrid({ selectedCategory, searchQuery }) {
   });
 
   return (
-    <div className="mt-8 grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
       {filteredVideos.map((video) => (
         <VideoCard key={video._id} video={video} />
       ))}

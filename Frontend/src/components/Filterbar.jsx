@@ -16,13 +16,18 @@ function Filterbar({ selectedCategory, setSelectedCategory }) {
   ];
 
   return (
-    <div className="flex z-50 top-12 fixed bg-white w-full">
-      <ul className="flex gap-3">
+    <div className="z-40 top-12 fixed bg-white w-full shadow-sm">
+      <ul
+        className="flex gap-3 px-3 py-2
+          overflow-x-auto
+          scrollbar-hide
+          whitespace-nowrap"
+      >
         {categories.map((item) => (
           <li
             key={item}
             onClick={() => setSelectedCategory(item)}
-            className={`px-4 py-1 rounded cursor-pointer text-sm whitespace-nowrap
+            className={`px-4 py-1 rounded cursor-pointer text-sm transition
               ${
                 selectedCategory === item
                   ? "bg-black text-white"

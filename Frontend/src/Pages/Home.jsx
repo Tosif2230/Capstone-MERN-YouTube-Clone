@@ -8,7 +8,7 @@ function Home() {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
   return (
-    <div>
+    <div className="pt-[96px]">
       <Filterbar 
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}

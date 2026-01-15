@@ -39,32 +39,29 @@ function CreateChannel() {
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white w-125 rounded-xl p-6">
+      <div className="bg-white w-full rounded-xl p-6 max-w-md">
         {/* Header */}
         <h2 className="text-lg font-semibold mb-6">Create Your Channel Here</h2>
 
         {/* Avatar */}
         <div className="flex flex-col items-center mb-6">
           <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-4xl text-red-600">
-            
+            {channelName ? channelName[0].toUpperCase() : "C"}
           </div>
-          <button className="text-black text-sm mt-2">
+          <button className="text-sm mt-2 text-black hover:underline">
             Select picture
           </button>
         </div>
 
         {/* Inputs */}
-        <div className="space-y-4">
-          <div>
-            <input
-              type="text"
-              placeholder="Channel name"
-              value={channelName}
-              onChange={(e) => setChannelName(e.target.value)}
-              className="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
-            />
-          </div>
-        </div>
+
+        <input
+          type="text"
+          placeholder="Channel name"
+          value={channelName}
+          onChange={(e) => setChannelName(e.target.value)}
+          className="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+        />
 
         {/* Actions */}
         <div className="flex justify-end gap-3 mt-6">

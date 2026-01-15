@@ -100,8 +100,8 @@ function Login() {
   }
 
   return (
-    <div className="bg-[url('/Youtube.jpg')] bg-cover min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+    <div className="bg-[url('/Youtube.jpg')] bg-cover min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 sm:p-8">
         <h2 className="text-2xl font-bold text-center mb-6 text-red-600">
           {isLogin ? "Login" : "Sign Up"}
         </h2>
@@ -117,7 +117,7 @@ function Login() {
                 className="w-full px-4 py-2 border rounded-lg"
               />
               {errors.fullName && (
-                <p className="text-red-500 text-sm">{errors.fullName}</p>
+                <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
               )}
             </>
           )}
@@ -130,7 +130,7 @@ function Login() {
             className="w-full px-4 py-2 border rounded-lg"
           />
           {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
           )}
 
           <input
@@ -141,12 +141,12 @@ function Login() {
             className="w-full px-4 py-2 border rounded-lg"
           />
           {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.password}</p>
           )}
 
           <button
             type="button"
-            className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
+            className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 disabled:opacity-60"
             onClick={!isLogin ? handleSignUp : handleLogin}
           >
             {isLogin ? "Login" : "Sign Up"}
