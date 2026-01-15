@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import CommentModel from "../model/Comment.model.js";
+import VideoModel from "../model/Video.model.js";
 
 //Create Comment
 export async function addComment(req, res) {
@@ -15,6 +16,10 @@ export async function addComment(req, res) {
       text,
       videoId,
       userId: req.user.id,
+    });
+
+    await VideoModel.findByIdAndUpdate(videoId, {
+      $push: { comments: comment._id },
     });
 
     return res.status(201).json({ Message: comment });

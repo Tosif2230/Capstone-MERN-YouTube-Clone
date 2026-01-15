@@ -8,34 +8,18 @@ const videoSchema = new mongoose.Schema(
     videoUrl: { type: String, required: true },
 
     channelId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Channel",
-      required: true,
-    },
+      type: mongoose.Schema.Types.ObjectId, ref: "Channel", required: true,},
 
-    uploader: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    uploader: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true,},
 
     category: { type: String, required: true },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment", } ],
 
     views: { type: Number, default: 0 },
 
-    likes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    likes: [ { type: mongoose.Schema.Types.ObjectId, ref: "User", } ],
 
-    dislikes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    dislikes: [ { type: mongoose.Schema.Types.ObjectId, ref: "User", } ],
   },
   { timestamps: true }
 );

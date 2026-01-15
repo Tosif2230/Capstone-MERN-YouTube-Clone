@@ -1,13 +1,19 @@
 import mongoose from "mongoose";
 import VideoModel from "../model/Video.model.js";
+import ChannelModel from "../model/Channel.model.js";
 
 /* CREATE VIDEO */
 export async function createVideo(req, res) {
   try {
     const { title, description, thumbnailUrl, videoUrl, channelId, category } =
       req.body;
+      
+    const channel = await ChannelModel.findById(channelId);
 
-    
+    if (!channel || channel.owner.toString() !== req.user.id) {
+      return res.status(403).json({ message: "Not your channel" });
+    }
+
     const video = await VideoModel.create({
       title,
       description,
@@ -175,8 +181,8 @@ export async function likeVideo(req, res) {
     return res.status(200).json({
       likes: video.likes.length,
       dislikes: video.dislikes.length,
-      isLiked: video.likes.includes(userId),
-      isDisliked: video.dislikes.includes(userId),
+      isLiked: !isLiked,
+      isDisliked: false,
     });
   } catch (error) {
     return res.status(500).json({ message: "Failed to like video" });
@@ -196,14 +202,14 @@ export async function dislikeVideo(req, res) {
     const isLiked = video.likes.some((id) => id.toString() === userId);
     const isDisliked = video.dislikes.some((id) => id.toString() === userId);
 
-    if (isDisliked) {
-      video.dislikes.pull(userId);
-    }
-
     if (isLiked) {
       video.likes.pull(userId);
+    }
+
+    if (isDisliked) {
+      video.dislikes.pull(userId);
     } else {
-      video.likes.push(userId);
+      video.dislikes.push(userId);
     }
 
     await video.save();
@@ -211,8 +217,8 @@ export async function dislikeVideo(req, res) {
     return res.status(200).json({
       likes: video.likes.length,
       dislikes: video.dislikes.length,
-      isLiked: video.likes.includes(userId),
-      isDisliked: video.dislikes.includes(userId),
+      isLiked: false,
+      isDisliked: !isDisliked,
     });
   } catch (error) {
     return res.status(500).json({ message: "Failed to dislike video" });

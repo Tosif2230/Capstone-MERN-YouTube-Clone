@@ -7,12 +7,12 @@ export function authMiddleware(req, res, next) {
     if (!header || !header.startsWith("Bearer ")) {
       return res
         .status(401)
-        .json({ message: "Access Denied, No token provided." });
+        .json({ message: "Unauthorized" });
     }
     const token = header.split(" ")[1];
-
     //verifyToken
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
     req.user = decoded; //User Payload
     next();
   } catch (error) {

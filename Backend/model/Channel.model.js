@@ -21,6 +21,13 @@ const channelSchema = new mongoose.Schema(
       ref: "User",
       unique: true, //single user for single channel
     },
+    videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
+    subscribers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   { timestamps: true }
 );

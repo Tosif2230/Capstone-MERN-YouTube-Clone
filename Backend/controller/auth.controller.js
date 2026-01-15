@@ -48,7 +48,7 @@ export async function loginUser(req, res) {
     }
 
     //password varification
-    const validPassword =  bcrypt.compareSync(password, user.password);
+    const validPassword = bcrypt.compareSync(password, user.password);
     if (!validPassword) {
       return res.status(401).json({ message: "Invalid Password" });
     }
