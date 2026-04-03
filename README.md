@@ -173,22 +173,28 @@ Full Stack Developer (MERN)
 ```bash
 cd backend
 npm install
-npm run dev
+npm start
 
 cd frontend
 npm install
 npm run dev
 
 ----
+```
+
+## Live Demo
+  <a href="https://capstone-mern-you-tube-clone.vercel.app/">Live Demo</a>
+
 
 ## ⚙️ Environment Variables
-
+```
 Create a `.env` file in the backend root folder then put your env. variables like below example:
 
 - PORT=5050
 - DB_URL=your_mongodb_connection_string
 - JWT_SECRET=your_secret_key
+```
 
----
+
 
 ## Give a Star to repo.
