@@ -36,7 +36,7 @@ function Login() {
 
     if (!validate()) return;
     try {
-      const resp = await fetch("http://localhost:5050/api/register", {
+      const resp = await fetch("https://capstone-mern-youtube-clone.onrender.com/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ function Login() {
     e.preventDefault();
     if (!validate()) return;
     try {
-      const resp = await fetch("http://localhost:5050/api/login", {
+      const resp = await fetch("https://capstone-mern-youtube-clone.onrender.com/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
